@@ -1,6 +1,6 @@
 # CNRS_DS
 
-# Building the running the system
+# Building and running the system
 
 ```
 cd build
