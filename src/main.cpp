@@ -3,6 +3,20 @@
 #include "../include/modulated_DS.h"
 #include "../include/calculate_alpha.h"
 
+
+
+
+void orthonormalize(Eigen::Matrix3d& basis){
+    assert(basis.rows() == basis.cols());
+    uint dim = basis.rows();
+    basis.col(0).normalize();
+    for(uint i=1;i<dim;i++){
+        for(uint j=0;j<i;j++)
+            basis.col(i) -= basis.col(j).dot(basis.col(i))*basis.col(j);
+        basis.col(i).normalize();
+    }
+}
+
 int main(){
 
     /*
@@ -24,12 +38,13 @@ int main(){
     EXCEPTION: The motion will not be nice if the end effector start on the line joining the two attractors - self explanatory
     */
 
-    double sigma = 3.0;
+     
 
-    Eigen::Matrix3d gain_main;
-    Eigen::Matrix3d gain_aux;
+    double sigma = 3.0;  // parameter for the rbf kernel in modulated DS
 
-    Eigen::Matrix3d rotation;
+    Eigen::Matrix3d gain_main;  // simplified gains for main DS
+    Eigen::Matrix3d gain_aux;  // simplified gains for main DS
+
     Eigen::Vector3d attractor_main;
     Eigen::Vector3d attractor_aux;
 
@@ -42,14 +57,15 @@ int main(){
                 0.0, -0.3, 0.0,
                 0.0, 0.0, -0.3;
 
-    rotation << 1.0, 0.0, 0.0,
-                0.0, 1.0, 0.0,
-                0.0, 0.0, 1.0;
 
     Eigen::Vector3d release_position = {0.2, 0.4, 0.4};   // Examples
     Eigen::Vector3d release_velocity = {0.2, 0.2, 0.2};   // Examples
     Eigen::Vector3d current_end_effector = {0.1, 0.3, 0.2};   // Examples
     Eigen::Vector3d end_effector_init = {0.1, 0.1, 0.1};
+
+    Eigen::Matrix3d rotation = Eigen::Matrix3d::Random(3,3); 
+    rotation.block<3,1>(0,0) = 1.0/release_velocity.norm() * release_velocity;      
+    orthonormalize(rotation);
 
     attractor_main = release_position + 0.8*release_velocity/release_velocity.norm();
     attractor_aux = (4.0/3.0)*release_position - (1.0/3.0)*attractor_main;

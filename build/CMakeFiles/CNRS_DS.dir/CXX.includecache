@@ -50,10 +50,6 @@ string
 Eigen/Dense
 -
 
-/home/harshit/DS/CNRS_DS/src/calculate_alpha.cpp
-../include/calculate_alpha.h
-/home/harshit/DS/CNRS_DS/include/calculate_alpha.h
-
 /home/harshit/DS/CNRS_DS/src/main.cpp
 iostream
 -
@@ -63,14 +59,6 @@ iostream
 /home/harshit/DS/CNRS_DS/include/modulated_DS.h
 ../include/calculate_alpha.h
 /home/harshit/DS/CNRS_DS/include/calculate_alpha.h
-
-/home/harshit/DS/CNRS_DS/src/modulated_DS.cpp
-../include/modulated_DS.h
-/home/harshit/DS/CNRS_DS/include/modulated_DS.h
-
-/home/harshit/DS/CNRS_DS/src/nominal_DS.cpp
-../include/nominal_DS.h
-/home/harshit/DS/CNRS_DS/include/nominal_DS.h
 
 /usr/include/eigen3/Eigen/Cholesky
 Core
