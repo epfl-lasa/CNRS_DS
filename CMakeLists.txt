@@ -8,7 +8,7 @@ include_directories(include)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 
-add_executable(CNRS_DS src/main.cpp src/nominal_DS.cpp src/modulated_DS.cpp src/calculate_alpha.cpp src/sample_DS.cpp)
+add_executable(CNRS_DS src/main.cpp src/nominal_DS.cpp src/modulated_DS.cpp src/calculate_alpha.cpp)
 
 target_link_libraries(CNRS_DS ${Eigen3_LIBRARIES} "stdc++fs")
 

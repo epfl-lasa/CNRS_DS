@@ -1,10 +1,10 @@
 #include "../include/calculate_alpha.h"
 
-double calculate_alpha(Eigen::Vector3d &end_effector_position, const Eigen::Vector3d &end_effector_init, const Eigen::Vector3d &object_position, Eigen::Vector3d &attractor_main){
+double calculate_alpha(Eigen::Vector3d &end_effector_position, const Eigen::Vector3d &end_effector_init, const Eigen::Vector3d &release_position, Eigen::Vector3d &attractor_main){
 
-    Eigen::Vector3d normal_vector = attractor_main - object_position;
-    Eigen::Vector3d initial_vector = end_effector_init - object_position;
-    Eigen::Vector3d current_vector = end_effector_position - object_position;
+    Eigen::Vector3d normal_vector = attractor_main - release_position;
+    Eigen::Vector3d initial_vector = end_effector_init - release_position;
+    Eigen::Vector3d current_vector = end_effector_position - release_position;
 
     Eigen::Vector3d initial_vector_projection = initial_vector - initial_vector.dot(normal_vector)*normal_vector / (normal_vector.squaredNorm());
     Eigen::Vector3d current_vector_projection = current_vector - current_vector.dot(normal_vector)*normal_vector / (normal_vector.squaredNorm());
