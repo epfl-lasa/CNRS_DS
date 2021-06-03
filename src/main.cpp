@@ -1,10 +1,8 @@
 #include <iostream>
-#include "../include/nominal_DS.h"
-#include "../include/modulated_DS.h"
-#include "../include/calculate_alpha.h"
 
-
-
+#include <cnrs_ds/nominal_DS.h>
+#include <cnrs_ds/modulated_DS.h>
+#include <cnrs_ds/calculate_alpha.h>
 
 void orthonormalize(Eigen::Matrix3d& basis){
     assert(basis.rows() == basis.cols());
@@ -28,17 +26,17 @@ int main(){
     2. main attractor
 
     The release position is in between the two attractors and this allows for the DS to pass through the release position with a release velocity
-    
+
     This is ofcourse subject to the gains of the linear DS used in the combination of the DSs.
-    
-    */ 
+
+    */
 
 
     /*
     EXCEPTION: The motion will not be nice if the end effector start on the line joining the two attractors - self explanatory
     */
 
-     
+
 
     double sigma = 3.0;  // parameter for the rbf kernel in modulated DS
 
@@ -52,7 +50,7 @@ int main(){
                 0.0, -0.6, 0.0,
                 0.0, 0.0, -0.9;
 
-  
+
     gain_aux << -0.3, 0.0, 0.0,
                 0.0, -0.3, 0.0,
                 0.0, 0.0, -0.3;
@@ -76,7 +74,7 @@ int main(){
     Eigen::Vector3d velocity_nominal_main = nominal_DS(rotation, gain_main, current_end_effector, attractor_main);
     Eigen::Vector3d velocity_nominal_aux = nominal_DS(rotation, gain_aux, current_end_effector, attractor_aux);
     Eigen::Vector3d velocity_modulated = modulated_DS(attractor_main, release_position, current_end_effector, sigma);
-    
+
     Eigen::Vector3d net_velocity = alpha*velocity_nominal_aux + (1 - alpha)*velocity_nominal_main + velocity_modulated;
 
     net_velocity = (net_velocity/net_velocity.norm()) * release_velocity.norm();
