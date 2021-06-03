@@ -1,4 +1,4 @@
-#include "../include/calculate_alpha.h"
+#include <cnrs_ds/calculate_alpha.h>
 
 double calculate_alpha(Eigen::Vector3d &end_effector_position, const Eigen::Vector3d &end_effector_init, const Eigen::Vector3d &release_position, Eigen::Vector3d &attractor_main){
 
@@ -21,4 +21,4 @@ double calculate_alpha(Eigen::Vector3d &end_effector_position, const Eigen::Vect
     }
 
     return alpha;
-};
+}
